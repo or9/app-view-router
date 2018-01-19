@@ -5,26 +5,40 @@
   <link rel="import" href="app-view-router.html" />
 </head><body>
 
-  <app-view-router>
-	<app-view
-		route="page-0"
-      		template="page-0-file.html"
-      		></app-view>
+  <app-view-router insertion-point-id="page">
+  	<app-view
+  		route="page-0"
+      template="page-0-file.html"
+      ></app-view>
 
-	<app-view
-		route="page-1"
-		template="page-1-file.html"
-		></app-view>
+  	<app-view
+  		route="page-1"
+  		template="page-1-file.html"
+  		></app-view>
 
-	<app-view
-		route="page-2"
-		template="page-2-file.html"
-		></app-view>
+  	<app-view
+  		route="page-2"
+  		template="page-2-file.html"
+  		></app-view>
 
   </app-view-router>
+
+  <header>
+    <h1><a href="https://github.com/or9">Github</a></h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/#/page-0">Page 0</a></li>
+      <li><a href="/#/page-1">Page 1</a></li>
+      <li><a href="/#/page-2">Page 2</a></li>
+    </ul>
+  </nav>
 
   <!-- ID of "page" is required as insertion point for view module -->
   <section id="page">
   </section>
+
+  <footer>©0000</footer>
 
 </body></html>

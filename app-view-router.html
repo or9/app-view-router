@@ -24,59 +24,63 @@
         previousView: {
           type: String,
           value: () => ""
+        },
+        insertionPointId: {
+        	type: String,
+        	value: () => "page"
         }
       },
       observers: [
         "_viewChanged(routeData.page)"
       ],
       _viewChanged (viewChangeRecord) {
-        // load data for view
-        this.debounce("append-view", () => {
+		// load data for view
+		this.debounce("append-view", () => {
         	const routeNodes = Polymer.dom(this.$$("content")).getDistributedNodes();
-		const link = doc.querySelector(`link#${viewChangeRecord}`);
+			const link = doc.querySelector(`link#${viewChangeRecord}`);
 
-		if (link) {
-			appendView.call(this);
-		} else {
-			const href = routeNodes
-				.find(node => node.getAttribute("route") === viewChangeRecord)
-				.getAttribute("template");
-
-			let linkElement = doc.createElement("link");
-			linkElement.id = viewChangeRecord;
-			linkElement.rel = "import";
-			linkElement.href = href;
-			// linkElement.href = `${viewChangeRecord}-working.html`;
-			linkElement.onload = () => {
-				console.log("Loaded view component", viewChangeRecord);
+			if (link) {
 				appendView.call(this);
-			};
-			linkElement.onerror = (e) => {
-				console.error("Failed to load view component", e);
+			} else {
+				const href = routeNodes
+					.find(node => node.getAttribute("route") === viewChangeRecord)
+					.getAttribute("template");
+
+				let linkElement = doc.createElement("link");
+				linkElement.id = viewChangeRecord;
+				linkElement.rel = "import";
+				linkElement.href = href;
+				// linkElement.href = `${viewChangeRecord}-working.html`;
+				linkElement.onload = () => {
+					console.log("Loaded view component", viewChangeRecord);
+					appendView.call(this);
+				};
+				linkElement.onerror = (e) => {
+					console.error("Failed to load view component", e);
+				}
+				doc.head.appendChild(linkElement);
+
 			}
-			doc.head.appendChild(linkElement);
+
+			function appendView () {
+		          	const previousEl = doc.querySelector(`view-${this.previousView}`);
+				if ( previousEl ) {
+					previousEl.parentNode.removeChild(previousEl);
+				}
+
+				var el = doc.querySelector(`view-${viewChangeRecord}`);
+
+				if (!el) {
+					el = doc.createElement(`view-${viewChangeRecord}`);
+				}
+
+				doc.querySelector(`#${this.insertionPointId}`).appendChild(el);
+				this.previousView = viewChangeRecord;
+
+			}
+		}, 50);
 
 		}
-
-		function appendView () {
-	          	const previousEl = doc.querySelector(`view-${this.previousView}`);
-			if ( previousEl ) {
-				previousEl.parentNode.removeChild(previousEl);
-			}
-
-			var el = doc.querySelector(`view-${viewChangeRecord}`);
-
-			if (!el) {
-				el = doc.createElement(`view-${viewChangeRecord}`);
-			}
-
-			doc.querySelector("#view").appendChild(el);
-			this.previousView = viewChangeRecord;
-
-		}
-	}, 50);
-
-      }
     });
   })(window, document, Polymer);
 </script>
