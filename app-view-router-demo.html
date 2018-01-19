@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="utf-8" />
+  <title>App View Router Component Implementation</title>
+  <link rel="import" href="bower_components/polymer/polymer.html" />
+  <link rel="import" href="app-view-router.html" />
+</head><body>
+
+  <app-view-router>
+	<app-view
+		route="page-0"
+      		template="page-0-file.html"
+      		></app-view>
+
+	<app-view
+		route="page-1"
+		template="page-1-file.html"
+		></app-view>
+
+	<app-view
+		route="page-2"
+		template="page-2-file.html"
+		></app-view>
+
+  </app-view-router>
+
+  <!-- ID of "page" is required as insertion point for view module -->
+  <section id="page">
+  </section>
+
+</body></html>

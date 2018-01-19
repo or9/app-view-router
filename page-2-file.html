@@ -1,0 +1,23 @@
+<link rel="import" href="./my-component-2-0" />
+<link rel="import" href="./my-component-2-1" />
+<link rel="import" href="./my-component-2-2" />
+
+<dom-module id="view-page-2">
+	<template>
+		<h1>Some page content 2</h1>
+		<my-component-0-0></my-component-2-0>
+		<my-component-0-1></my-component-2-1>
+		<my-component-0-2></my-component-2-2>
+	</template>
+	<script>
+		(function (P) {
+			"use strict";
+			P({
+				is: "view-page-2",
+				ready () {
+					console.info("Here I am 2");
+				}
+			});
+		})(Polymer);
+	</script>
+</dom-module>
