@@ -1,0 +1,27 @@
+{
+  "name": "@or9-rockman/app-view-router",
+  "version": "0.0.1",
+  "description": "Polymer app router",
+  "main": "app-view-router.html",
+  "scripts": {
+	  "pretest": "",
+    "test": "CHROME_ARGS=\"${CHROME_ARGS:-no-sandbox}\" NODE_TLS_REJECT_UNAUTHORIZED=0 wct"
+    "posttest": "npm run sonarcoverage",
+    "test:watch": "npm test -- -p",
+    "sonarcoverage": "sonar-generic-coverage-convertor --location ./coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/or9/app-view-router.git"
+  },
+  "keywords": [
+    "polymer",
+    "router"
+  ],
+  "author": "Drahman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/or9/app-view-router/issues"
+  },
+  "homepage": "https://github.com/or9/app-view-router#readme"
+}
